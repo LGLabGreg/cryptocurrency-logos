@@ -67,23 +67,23 @@ const prepareData = data => {
   });
   downloadImage();
 };
+const handleNext = () => {
+  if (current < coins.length - 1) {
+    current++;
+    downloadImage();
+  }
+}
 const downloadImage = () => {
   downloadOptions.url = baseImageUrl + coins[current].ImageUrl;
   download
     .image(downloadOptions)
     .then(({ filename, image }) => {
       console.log('File saved to', filename);
-      if (current < coins.length - 1) {
-        current++;
-        downloadImage();
-      }
+      handleNext();
     })
     .catch(err => {
       // Don't care, get next one
       console.log('error', err);
-      if (current < coins.length - 1) {
-        current++;
-        downloadImage();
-      }
+      handleNext();
     });
 };
